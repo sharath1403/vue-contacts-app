@@ -68,11 +68,24 @@ export default {
   width: 100%;
 
   button {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    margin: 0 4px;
     cursor: pointer;
-    background-color: grey;
+  }
+
+  button:hover {
+    background-color: #cecece;
+  }
+
+  button.active {
+    background-color: orange;
     color: white;
-    border-radius: 6px;
-    border: 1px solid black;
+    font-weight: bold;
+    border-color: orange;
   }
 
   @media (max-width: 640px) {
