@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write # This gives the bot permission to push
+  contents: write  # This gives the bot permission to push
 
 jobs:
   build-deploy:
