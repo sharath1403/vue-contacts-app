@@ -5,7 +5,8 @@ module.exports = {
   },
   productionSourceMap: true, // only for production build if needed
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/<vue-contacts-app>/'
+    ? '/vue-contacts-app/'
     : '/'
+
 }
 
