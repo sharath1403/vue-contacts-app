@@ -77,7 +77,7 @@ export default {
 
   @media (max-width: 640px) {
     gap: 10px;
-
+    margin-top: 1rem;
     button {
       font-size: 14px;
     }
