@@ -94,7 +94,7 @@ body {
   width: 728px;
   margin: auto;
   @media (max-width: 640px) {
-    width: 360px;
+    width: auto;
   }
   select {
     height: fit-content;

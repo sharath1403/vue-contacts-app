@@ -1,24 +1,15 @@
 <template>
-  <div class="contact-card">
-    <div class="contact-card__image">
+  <div class="cards-container">
+    <div class="card">
       <img :src="user.picture.large" alt="User photo" class="user-img" />
-    </div>
-    <div class="contact-card__details">
-      <h2 class="contact-card__name">
-        {{ user.name.first }} {{ user.name.last }}
-      </h2>
-      <div class="address-div">
-        <p class="contact-card__address">
-          {{ user.location.street.number }} {{ user.location.street.name
-          }}<br />
-          {{ user.location.postcode }} {{ user.location.city }}<br />
+      <div class="card-content">
+        <div class="name">{{ user.name.first }} {{ user.name.last }}</div>
+        <div class="address">
+          {{ user.location.street.number }} {{ user.location.street.name }},
+          {{ user.location.postcode }} {{ user.location.city }},
           {{ user.location.country.toUpperCase() }}
-        </p>
-        <div class="contact-card__action">
-          <a href="tel:8554630704" class="contact-card__button"
-            >Call {{ user.phone }}</a
-          >
         </div>
+        <div class="call-section">📞 Call {{ user.phone }}</div>
       </div>
     </div>
   </div>
@@ -27,150 +18,109 @@
 <script>
 export default {
   props: ["user"],
-  computed: {
-    fullAddress() {
-      const loc = this.user.location;
-      return `${loc.street.number} ${loc.street.name}, ${loc.city}, ${loc.state}, ${loc.country}`;
-    },
-  },
 };
 </script>
 
-<style lang="scss" scoped>
-.address-div {
+<style scoped lang="scss">
+.cards-container {
   display: flex;
-  gap: 20px;
-
-  @media (max-width: 640px) {
-    flex-direction: column;
-  }
+  flex-wrap: wrap;
+  gap: 20px 40px; /* 20px top-bottom, 40px left-right */
+  justify-content: center;
+  align-items: stretch; /* ensures equal height */
 }
 
-.contact-card {
+.card {
+  width: 300px;
   display: flex;
-  align-items: center;
-  background: #ffffff;
-  border-radius: 0.75rem;
-  padding: 1.25rem 2.5rem;
-  box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
-  max-width: 40.5rem;
-  margin: 1rem auto;
-  gap: 0;
+  flex-direction: column;
+  background: #fff;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  height: 100%; /* necessary for flex equal height */
+}
 
-  @media (max-width: 640px) {
-    max-width: 210px;
+.card-image {
+  width: 100%;
+  height: auto;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: 32px; /* space from image to name */
+}
+
+.name {
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.address {
+  margin-bottom: 20px;
+}
+
+.call-section {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+@media (min-width: 640px) {
+  .card {
+    flex-direction: row;
+    width: 728px;
+    height: 203px;
+    padding: 20px 40px;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .user-img {
+    align-self: flex-start;
+    flex-shrink: 0;
+  }
+
+  .card-content {
+    flex-direction: row;
     flex-wrap: wrap;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 32px;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0 20px;
   }
 
-  @media (max-width: 430px) {
-    max-width: 310px;
-  }
-
-  &__image {
-    flex: 0 0 auto;
-
-    img {
-      width: 8rem;
-      height: 8rem;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 0.125rem solid #ccc;
-    }
-  }
-
-  &__details {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-left: 2.5rem;
-
-    @media (max-width: 640px) {
-      margin-left: 0;
-    }
-
-    &__name,
-    .contact-card__name {
-      margin: 0;
-      font-size: 1.75rem;
-      color: #333;
-      text-align: center;
-    }
-
-    &__address,
-    .contact-card__address {
-      margin: 0;
-      font-size: 0.875rem;
-      color: #666;
-      line-height: 1.5;
-      width: 230px;
-
-      @media (max-width: 640px) {
-        width: 210px;
-        text-align: center;
-      }
-
-      @media (max-width: 430px) {
-        width: 310px;
-      }
-    }
-  }
-
-  &__action {
-    flex: 0 0 auto;
-    margin-left: auto;
-    display: flex;
-    align-items: flex-end;
-
-    .contact-card__button {
-      margin: 0;
-      display: flex;
-      height: 14px;
-      justify-content: center;
-      align-items: center;
-      background-color: #e17b00;
-      width: 198px;
-      color: #ffffff;
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      text-decoration: none;
-      white-space: nowrap;
-      font-size: 16px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-
-      @media (max-width: 640px) {
-        width: 178px;
-      }
-
-      @media (max-width: 430px) {
-        width: 278px;
-      }
-
-      &:hover {
-        background-color: #c96c00;
-      }
-    }
-  }
-
-  &__name {
-    display: flex;
+  .name {
+    width: 480px;
     height: 80px;
+    font-size: 28px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    display: flex;
     align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+  }
 
-    @media (max-width: 640px) {
-      width: 210px;
-      justify-content: center;
-      align-items: flex-start;
-    }
+  .address {
+    width: 230px;
+    height: 63px;
+    margin: 0;
+    text-align: left;
+  }
 
-    @media (max-width: 430px) {
-      width: 310px;
-    }
+  .call-section {
+    width: 230px;
+    height: 63px;
+    margin: 0;
+    text-align: left;
+    padding: 0;
+    border: none;
+    align-self: flex-start;
   }
 }
 </style>
