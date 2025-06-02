@@ -45,6 +45,7 @@ export default {
     flex-direction: column;
   }
 }
+
 .contact-card {
   display: flex;
   align-items: center;
@@ -58,11 +59,11 @@ export default {
 
   @media (max-width: 640px) {
     max-width: 210px;
-    height: 327px;
     flex-wrap: wrap;
     margin: 0;
     display: flex;
     justify-content: center;
+    gap: 32px;
   }
 
   @media (max-width: 430px) {
@@ -94,8 +95,9 @@ export default {
     &__name,
     .contact-card__name {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: 1.75rem;
       color: #333;
+      text-align: center;
     }
 
     &__address,
@@ -105,10 +107,12 @@ export default {
       color: #666;
       line-height: 1.5;
       width: 230px;
+
       @media (max-width: 640px) {
         width: 210px;
         text-align: center;
       }
+
       @media (max-width: 430px) {
         width: 310px;
       }
@@ -142,6 +146,7 @@ export default {
       @media (max-width: 640px) {
         width: 178px;
       }
+
       @media (max-width: 430px) {
         width: 278px;
       }
@@ -156,11 +161,13 @@ export default {
     display: flex;
     height: 80px;
     align-items: flex-end;
+
     @media (max-width: 640px) {
-      height: 30px;
       width: 210px;
       justify-content: center;
+      align-items: flex-start;
     }
+
     @media (max-width: 430px) {
       width: 310px;
     }
