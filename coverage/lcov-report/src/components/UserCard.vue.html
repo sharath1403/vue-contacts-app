@@ -230,20 +230,7 @@
 <a name='L165'></a><a href='#L165'>165</a>
 <a name='L166'></a><a href='#L166'>166</a>
 <a name='L167'></a><a href='#L167'>167</a>
-<a name='L168'></a><a href='#L168'>168</a>
-<a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L168'></a><a href='#L168'>168</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -401,28 +388,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;div class="contact-card"&gt;
-    &lt;div class="contact-card__image"&gt;
-      &lt;img :src="user.picture.large" alt="User photo" class="user-img" /&gt;
-    &lt;/div&gt;
-    &lt;div class="contact-card__details"&gt;
-      &lt;h2 class="contact-card__name"&gt;
-        {{ user.name.first }} {{ user.name.last }}
-      &lt;/h2&gt;
-      &lt;div class="address-div"&gt;
-        &lt;p class="contact-card__address"&gt;
-          {{ user.location.street.number }} {{ user.location.street.name
-          }}&lt;br /&gt;
-          {{ user.location.postcode }} {{ user.location.city }}&lt;br /&gt;
-          {{ user.location.country.toUpperCase() }}
-        &lt;/p&gt;
-        &lt;div class="contact-card__action"&gt;
-          &lt;a href="tel:8554630704" class="contact-card__button"
-            &gt;Call {{ user.phone }}&lt;/a
-          &gt;
-        &lt;/div&gt;
+  &lt;div class="card"&gt;
+    &lt;img :src="user.picture.large" alt="User photo" class="card-image" /&gt;
+    &lt;div class="card-content"&gt;
+      &lt;div class="name"&gt;{{ user.name.first }} {{ user.name.last }}&lt;/div&gt;
+      &lt;div class="address"&gt;
+        {{ user.location.street.number }} {{ user.location.street.name }},
+        {{ user.location.postcode }} {{ user.location.city }},
+        {{ user.location.country.toUpperCase() }}
       &lt;/div&gt;
+      &lt;div class="call-section"&gt;Call {{ user.phone }}&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/template&gt;
@@ -430,143 +415,152 @@
 &lt;script&gt;
 export default {
   props: ["user"],
-  computed: {
-    fullAddress() {
-      const loc = this.user.location;
-      return `${loc.street.number} ${loc.street.name}, ${loc.city}, ${loc.state}, ${loc.country}`;
-    },
-  },
 };
 &lt;/script&gt;
 &nbsp;
-&lt;style lang="scss" scoped&gt;
-.address-div {
+&lt;style scoped lang="scss"&gt;
+.cards-container {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 20px 40px; /* 20px top-bottom, 40px left-right */
+  justify-content: center;
+  align-items: stretch; /* ensures equal height */
+}
 &nbsp;
-  @media (max-width: 640px) {
-    flex-direction: column;
+.card {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  height: 100%;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+&nbsp;
+.card-image {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+}
+&nbsp;
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: 32px; /* space from image to name */
+  align-items: center;
+  width: 210px;
+}
+&nbsp;
+.name {
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+&nbsp;
+.address {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+&nbsp;
+.call-section {
+  margin-top: auto;
+  width: 210px;
+  height: 30px;
+  background: orange;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+&nbsp;
+.name,
+.address,
+.call-section {
+  text-align: center;
+}
+&nbsp;
+@media (max-width: 430px) {
+  .card {
+    width: 390px;
+  }
+  .card-content {
+    width: 310px;
+  }
+  .call-section {
+    width: 310px;
   }
 }
-.contact-card {
-  display: flex;
-  align-items: center;
-  background: #ffffff;
-  border-radius: 0.75rem;
-  padding: 1.25rem 2.5rem;
-  box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
-  max-width: 40.5rem;
-  margin: 1rem auto;
-  gap: 0;
 &nbsp;
-  @media (max-width: 640px) {
-    max-width: 210px;
-    height: 327px;
+@media (min-width: 640px) {
+  .card {
+    flex-direction: row;
+    width: 728px;
+    height: 203px;
+    padding: 20px 40px;
+    align-items: center;
+    gap: 40px;
+    border-radius: 20px;
+  }
+&nbsp;
+  .user-img {
+    align-self: flex-start;
+    flex-shrink: 0;
+  }
+&nbsp;
+  .card-content {
+    flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0 20px;
+  }
+&nbsp;
+  .name {
+    width: 480px;
+    height: 80px;
+    font-size: 28px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+  }
+&nbsp;
+  .address {
+    width: 230px;
+    height: 63px;
     margin: 0;
+    text-align: left;
+    font-size: 14px;
+  }
+&nbsp;
+  .call-section {
+    cursor: pointer;
+    width: 230px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    align-self: flex-start;
+    background: orange;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
     display: flex;
     justify-content: center;
-  }
-&nbsp;
-  @media (max-width: 430px) {
-    max-width: 310px;
-  }
-&nbsp;
-  &amp;__image {
-    flex: 0 0 auto;
-&nbsp;
-    img {
-      width: 8rem;
-      height: 8rem;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 0.125rem solid #ccc;
-    }
-  }
-&nbsp;
-  &amp;__details {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-left: 2.5rem;
-&nbsp;
-    @media (max-width: 640px) {
-      margin-left: 0;
-    }
-&nbsp;
-    &amp;__name,
-    .contact-card__name {
-      margin: 0;
-      font-size: 1.25rem;
-      color: #333;
-    }
-&nbsp;
-    &amp;__address,
-    .contact-card__address {
-      margin: 0;
-      font-size: 0.875rem;
-      color: #666;
-      line-height: 1.5;
-      width: 230px;
-      @media (max-width: 640px) {
-        width: 210px;
-        text-align: center;
-      }
-      @media (max-width: 430px) {
-        width: 310px;
-      }
-    }
-  }
-&nbsp;
-  &amp;__action {
-    flex: 0 0 auto;
-    margin-left: auto;
-    display: flex;
-    align-items: flex-end;
-&nbsp;
-    .contact-card__button {
-      margin: 0;
-      display: flex;
-      height: 14px;
-      justify-content: center;
-      align-items: center;
-      background-color: #e17b00;
-      width: 198px;
-      color: #ffffff;
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      text-decoration: none;
-      white-space: nowrap;
-      font-size: 16px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-&nbsp;
-      @media (max-width: 640px) {
-        width: 178px;
-      }
-      @media (max-width: 430px) {
-        width: 278px;
-      }
-&nbsp;
-      &amp;:hover {
-        background-color: #c96c00;
-      }
-    }
-  }
-&nbsp;
-  &amp;__name {
-    display: flex;
-    height: 80px;
-    align-items: flex-end;
-    @media (max-width: 640px) {
-      height: 30px;
-      width: 210px;
-      justify-content: center;
-    }
-    @media (max-width: 430px) {
-      width: 310px;
-    }
+    align-items: center;
   }
 }
 &lt;/style&gt;
@@ -577,7 +571,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-30T19:06:02.027Z
+                at 2025-06-02T12:07:29.479Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

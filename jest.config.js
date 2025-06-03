@@ -1,11 +1,15 @@
 module.exports = {
   preset: '@vue/cli-plugin-unit-jest/presets/typescript-and-babel',
   testEnvironment: 'jsdom',
-  collectCoverage: true, // enable coverage collection
+  collectCoverage: true,
   collectCoverageFrom: [
-    "src/**/*.{js,ts,vue}", // collect coverage from JS/TS/Vue files in src
-    "!src/main.ts",          // exclude main.ts if you want
-    "!**/node_modules/**",   // ignore dependencies
+    "src/**/*.{js,ts,vue}",
+    "!src/main.ts",
+    "!**/node_modules/**",
   ],
-  coverageReporters: ["html", "text", "lcov"], // formats for coverage report
+  coverageReporters: ["html", "text", "lcov"],
+  moduleNameMapper: {
+    '\\.(css|scss)$': 'identity-obj-proxy',
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
 }

@@ -1,24 +1,24 @@
 <template>
-  <main class="container">
-    <header class="app-header">
-      <h1>My Contacts</h1>
-      <select v-model="sortOrder">
+  <main class="app">
+    <header class="app__header">
+      <h1 class="app__title">My Contacts</h1>
+      <select v-model="sortOrder" class="app__select">
         <option value="asc">ascending</option>
         <option value="desc">descending</option>
       </select>
     </header>
-    <div v-if="loading" class="loading">Loading...</div>
-    <section v-else class="cards">
+    <div v-if="loading" class="app__loading">Loading...</div>
+    <section v-else class="app__cards">
       <div
         v-for="user in paginatedUsers"
         :key="user.login.uuid"
-        class="card-wrapper"
+        class="app__cards-container"
       >
         <UserCard :user="user" />
       </div>
     </section>
 
-    <PaginationComponent
+    <UserPagination
       :total="users.length"
       :cards-per-page="cardsPerPage"
       :current-page="currentPage"
@@ -28,11 +28,12 @@
 </template>
 
 <script>
-import UserCard from "./components/UserCard.vue";
-import PaginationComponent from "./components/PaginationComponent.vue";
-
+import UserCard from "@/components/UserCard.vue";
+import UserPagination from "@/components/UserPagination.vue";
+import "@/styles/base.scss";
+import "@/styles/App.scss";
 export default {
-  components: { UserCard, PaginationComponent },
+  components: { UserCard, UserPagination },
   data() {
     return {
       users: [],
@@ -58,64 +59,26 @@ export default {
     },
   },
   created() {
-    fetch("https://randomuser.me/api/?results=50")
-      .then((res) => res.json())
-      .then((data) => {
-        this.users = data.results;
-        this.loading = false;
-      });
+    this.fetchUsers();
   },
   methods: {
     handlePageChange(page) {
       this.currentPage = page;
     },
+    async fetchUsers() {
+      this.loading = true;
+      try {
+        const url = "https://randomuser.me/api/?results=50";
+        const response = await fetch(url);
+        const data = await response.json();
+        this.users = data.results;
+      } catch (error) {
+        // eslint-disable-next-line
+        console.error("Failed to fetch users:", error);
+      } finally {
+        this.loading = false;
+      }
+    },
   },
 };
 </script>
-
-<style lang="scss">
-body {
-  background-color: #f5f5f5;
-  font-family: "Open Sans", sans-serif;
-}
-.card-wrapper {
-  width: 100%;
-  @media (max-width: 640px) {
-    width: auto;
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
-
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 728px;
-  margin: auto;
-  @media (max-width: 640px) {
-    width: auto;
-  }
-  select {
-    height: fit-content;
-    padding: 10px 15px;
-    border: 1px solid black;
-    border-radius: 10px;
-  }
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; // spacing between cards
-  justify-content: center;
-}
-
-.user-card {
-  width: 100%; // default width for small screens
-}
-
-h1 {
-  color: #ef8100;
-}
-</style>

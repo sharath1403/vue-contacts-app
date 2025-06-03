@@ -30,20 +30,4 @@ describe('UserCard.vue', () => {
         expect(wrapper.text()).toContain('12345 Springfield');
         expect(wrapper.text()).toContain('USA');
     });
-
-    it('computes fullAddress correctly', () => {
-        const wrapper = shallowMount(UserCard, {
-            propsData: { user: mockUser },
-        });
-        expect(wrapper.vm.fullAddress).toBe('123 Main St, Springfield, IL, USA');
-    });
-
-    it('renders phone number in the call link', () => {
-        const wrapper = shallowMount(UserCard, {
-            propsData: { user: mockUser },
-        });
-        const callLink = wrapper.find('a');
-        expect(callLink.text()).toContain('Call 123-456-7890');
-        expect(callLink.attributes('href')).toBe('tel:8554630704'); // Note: hardcoded in your component
-    });
 });

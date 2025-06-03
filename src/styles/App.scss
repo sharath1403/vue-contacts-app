@@ -1,0 +1,51 @@
+@import "../styles/mixins.scss";
+@import "../styles/variables.scss";
+
+.app {
+  &__loading {
+    text-align: center;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 45.5rem;
+    margin: auto;
+
+    @include respond("small") {
+      width: auto;
+      padding: 0 1rem;
+    }
+  }
+
+  &__title {
+    color: $color-primary;
+  }
+
+  &__select {
+    padding: 0.625rem 0.9375rem;
+    border: 0.0625rem solid black;
+    border-radius: 0.625rem;
+  }
+
+  &__loading {
+    text-align: center;
+    font-size: 1.25rem;
+  }
+
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  &__cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2.5rem;
+    justify-content: center;
+    align-items: stretch;
+  }
+}

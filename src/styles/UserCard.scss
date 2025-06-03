@@ -1,0 +1,132 @@
+@import "../styles/variables.scss";
+
+.user-card {
+  width: 18.75rem;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: $box-shadow;
+  box-sizing: border-box;
+  height: 100%;
+  border-radius: $border-radius;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  &__image {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-top: 2rem;
+    align-items: center;
+    width: 13.125rem;
+  }
+
+  &__name {
+    font-weight: bold;
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  &__address {
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  &__call {
+    margin-top: auto;
+    width: 13.125rem;
+    height: 1.875rem;
+    background: orange;
+    border-radius: 0.313rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 430px) {
+  .user-card {
+    width: 24.375rem;
+    &__content {
+      width: 19.375rem;
+    }
+    &__call {
+      width: 19.375rem;
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .user-card {
+    flex-direction: row;
+    width: 45.5rem;
+    height: 12.688rem;
+    padding: 1.25rem 2.5rem;
+    align-items: center;
+    gap: 2.5rem;
+    border-radius: $border-radius;
+
+    &__image {
+      align-self: flex-start;
+      flex-shrink: 0;
+    }
+
+    &__content {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      width: 100%;
+      gap: 0 1.25rem;
+    }
+
+    &__name {
+      width: 30rem;
+      height: 5rem;
+      font-size: 1.75rem;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 400;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    &__address {
+      width: 14.375rem;
+      height: 3.938rem;
+      margin: 0;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    &__call {
+      cursor: pointer;
+      width: 14.375rem;
+      height: 1.875rem;
+      margin: 0;
+      padding: 0;
+      align-self: flex-start;
+      background: orange;
+      border-radius: 0.375rem;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

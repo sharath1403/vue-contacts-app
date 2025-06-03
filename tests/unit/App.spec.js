@@ -1,4 +1,3 @@
-// tests/unit/App.spec.js ✅ Plain JavaScript
 import { mount } from "@vue/test-utils";
 import flushPromises from "flush-promises";
 import App from "@/App.vue";
